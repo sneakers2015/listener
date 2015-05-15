@@ -18,7 +18,7 @@ The package can be installed to your Tizen device using Tizen SDK.
 Connect your Tizen device to your PC and launch it. Then Sound of Heart will be installed.
 
 # Authors
-Changyeon Lee <lisyoen@gmail.com>, Changhyun Lee <leechwin1@gmail.com>, Chulki Kim <>
+Changyeon Lee <lisyoen@gmail.com>, Changhyun Lee <leechwin1@gmail.com>, Chulki Kim <forsake83@naver.com>
 
 # License
 This software is distributed in MIT license
