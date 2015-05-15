@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tizenFile>
+    <fileInfo>
+        <type>tizen-page</type>
+        <version>0.0.2</version>
+        <desc>Tizen Web UI Builder Project</desc>
+    </fileInfo>
+    <document>
+        <documentInfo>
+            <title>test</title>
+            <author>noname</author>
+            <version>0.1.1</version>
+        </documentInfo>
+        <documentData>
+            <tizen.css>
+                <tizen.selector name="#divcontrol1" partId="divcontrol1">
+                    <tizen.style name="height" value="40px"/>
+                </tizen.selector>
+            </tizen.css>
+            <tizen.doc>
+                <tizen.page id="intro" data-dom-cache="false" data-title="">
+                    <tizen.content id="content1" data-handler="false">
+                        <html.divcontrol id="divcontrol1" style="overflow: hidden;" class="" ontap="divcontrol1_ontap"/>
+                        <html.image id="image1" src="../res/soundofheart.png" width="100" width-unit="%" height="100" height-unit="px" text-align="left" display="block"/>
+                        <html.image id="image2" src="../res/sneakers.jpg" width="100" width-unit="%" height="430" height-unit="px" text-align="left" display="block" ontap="image2_ontap"/>
+                    </tizen.content>
+                </tizen.page>
+            </tizen.doc>
+        </documentData>
+    </document>
+</tizenFile>

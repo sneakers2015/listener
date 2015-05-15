@@ -1,0 +1,4 @@
+.git
+.sdk_delta.info
+*.wgt
+.sign/*

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>listener</title>
+    <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.min.css">
+    <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="lib/tau/wearable/theme/default/tau.circle.min.css">
+    <!-- load theme file for your application -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- intro page -->
+    <div class="ui-page ui-page-active" id="intro">
+        <header class="ui-header">
+            <h2 class="ui-title">intro title</h2>
+        </header>
+        <div class="ui-content content-padding">
+            <ul class="ui-listview">
+                <p>로고, 이미지, 팀소개</p>
+            </ul>
+        </div>
+    </div>
+
+    <!-- list page -->
+    <div class="ui-page ui-page-active" id="list">
+        <header class="ui-header">
+            <h2 class="ui-title">소리목록</h2>
+        </header>
+        <div class="ui-content content-padding">
+            <ul class="ui-listview">
+                <p>소리목록(On/Off), 소리수정(swipe), 소리삭제(swipe)</p>
+            </ul>
+        </div>
+    </div>
+
+    <!-- new sound page -->
+    <div class="ui-page ui-page-active" id="new">
+        <header class="ui-header">
+            <h2 class="ui-title">소리등록</h2>
+        </header>
+        <div class="ui-content content-padding">
+            <ul class="ui-listview">
+                <p>녹음시작/중지, 소리이름입력, 전송번호선택/입력, 전송메시지 입력</p>
+            </ul>
+        </div>
+    </div>
+
+    <!-- new sound info page -->
+    <div class="ui-page ui-page-active" id="newInfo">
+        <header class="ui-header">
+            <h2 class="ui-title">정보입력</h2>
+        </header>
+        <div class="ui-content content-padding">
+            <ul class="ui-listview">
+                <p>이름입력, 전송번호입력, 전송메시지입력, [완료]</p>
+            </ul>
+        </div>
+    </div>
+
+    <!-- edit sound page -->
+    <div class="ui-page ui-page-active" id="edit">
+        <header class="ui-header">
+            <h2 class="ui-title">소리수정</h2>
+        </header>
+        <div class="ui-content content-padding">
+            <ul class="ui-listview">
+                <p>이름수정, 전송번호수정,전송메시지수정</p>
+            </ul>
+        </div>
+    </div>
+
+    <!-- history page -->
+    <div class="ui-page ui-page-active" id="edit">
+        <header class="ui-header">
+            <h2 class="ui-title">소리기록</h2>
+        </header>
+        <div class="ui-content content-padding">
+            <ul class="ui-listview">
+                <p>알림기록(이름,시간,전송여부), 알림삭제</p>
+            </ul>
+        </div>
+    </div>
+
+    <!-- alarm page -->
+    <div class="ui-page ui-page-active" id="alarm">
+        <header class="ui-header">
+            <h2 class="ui-title">백그라운드 알림</h2>
+        </header>
+        <div class="ui-content content-padding">
+            <ul class="ui-listview">
+                <p>알림내용(이름), 닫기버튼, 긴급상황버튼(전송번호)</p>
+            </ul>
+        </div>
+    </div>
+
+    <!-- send alarm page -->
+    <div class="ui-page ui-page-active" id="send">
+        <header class="ui-header">
+            <h2 class="ui-title">전송확인</h2>
+        </header>
+        <div class="ui-content content-padding">
+            <ul class="ui-listview">
+                <p>전송취소버튼, 전송버튼(전송번호,메시지)</p>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- load tau lib -->
+    <script type="text/javascript" src="lib/tau/wearable/js/tau.min.js"></script>
+    <script type="text/javascript" src="js/util/circle-helper.js"></script>
+    <script type="text/javascript" src="js/util/lowBatteryCheck.js"></script>
+    <script type="text/javascript" src="js/util/homeExit.js"></script>
+
+    <!-- app lib -->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+</body>
+</html>
