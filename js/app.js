@@ -196,6 +196,8 @@ window.onload = function () {
 };
 
 function startMatching() {
+// FIXME:: matcher for wearable
+/*
     var onSounds = _.filter(listenerApp.sounds, function (sound) { return sound.enabled; });
     var soundArray = _.toArray(onSounds);
     var samplePackages = _.pluck(soundArray, 'samplePackage');
@@ -206,6 +208,7 @@ function startMatching() {
         console.log("sample matched index:", sampleIndex, ", sound:", sound.id, sound.title);
         listenerApp.emit('soundMatched', sound.id);
     });
+*/
 }
 
 function stopMatching() {
