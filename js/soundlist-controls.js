@@ -13,6 +13,7 @@ var SoundListControl = (function() {
     var swipeList = null; //dynamic create
 
     function updateSoundList () {
+    	console.log('updateSoundList');
         var soundListView = $('#sound-listview');
         soundListView.children().remove();
         for (var i in listenerApp.sounds) {
@@ -22,6 +23,7 @@ var SoundListControl = (function() {
     }
 
     function addSoundListItem (id, title, enabled, dialNumber) {
+    	console.log('addSoundListItem');
         var li, label, span, input;
         li = document.createElement('li')
         label = document.createElement('label');
