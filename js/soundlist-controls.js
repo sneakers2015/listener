@@ -20,6 +20,7 @@ var SoundListControl = (function() {
             var sound = listenerApp.sounds[i];
             addSoundListItem(sound.id, sound.title, sound.enabled, sound.dialNumber);
         }
+        refreshSwipeList();
     }
 
     function addSoundListItem (id, title, enabled, dialNumber) {
@@ -65,10 +66,13 @@ var SoundListControl = (function() {
         }
         return false;
     }
-
-    page.addEventListener( "pagebeforeshow", function() {
-        // make SwipeList object
-        swipeList = tau.widget.SwipeList( listElement, {
+    
+    function refreshSwipeList () {
+    	if (swipeList) {
+    		swipeList.destroy();
+    		swipeList = null;
+    	}
+    	swipeList = tau.widget.SwipeList( listElement, {
             swipeTarget: "li",
             swipeElement: ".ui-swipelist"
                 /*
@@ -77,7 +81,21 @@ var SoundListControl = (function() {
                  * rtlStartColor : #xx
                  * rtlEndColor : #xx
                  */
-        });
+        }); 
+    }
+
+    page.addEventListener( "pagebeforeshow", function() {
+        // make SwipeList object
+//        swipeList = tau.widget.SwipeList( listElement, {
+//            swipeTarget: "li",
+//            swipeElement: ".ui-swipelist"
+//                /*
+//                 * ltrStartColor : #xx
+//                 * ltrEndColor : #xx
+//                 * rtlStartColor : #xx
+//                 * rtlEndColor : #xx
+//                 */
+//        });
 
         listElement.addEventListener("swipelist.right", function(evt) {
             console.log('swipe right', evt.target);
