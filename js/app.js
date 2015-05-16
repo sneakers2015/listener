@@ -54,18 +54,6 @@ function stop() {
 }
 
 /**
- * Change sound properties
- */
-function changeSettings(settingsObject) {
-    var settings = listenerApp.settings;
-    console.log('settingsObject', settings, settingsObject);
-    settingsObject = _.pick(settingsObject, 'showSoundIcons', 'runBackground');
-    _.extend(settings, settingsObject);
-    saveApp();
-    return true;
-}
-
-/**
  * Sound model
  * @param id
  * @param title
@@ -112,10 +100,10 @@ function addNewSound(title, soundData, samplePackage, dialNumber, message) {
     var _dialNumber = null;
     var _message = null;
     if (dialNumber !== undefined) {
-    	_dialNumber = dialNumber;
+        _dialNumber = dialNumber;
     }
     if (message !== undefined) {
-    	_message = message;
+        _message = message;
     }
     var newSound = new Sound(newid, title, true, soundData, samplePackage, true, _dialNumber, _message);  
     listenerApp.sounds[newid] = newSound;
@@ -187,7 +175,7 @@ function saveApp() {
     console.log('save');
     var appdata = _.pick(listenerApp, 'sounds', 'settings');
     console.log('appdata', appdata);
-    localStorage.setItem('appdata', JSON.stringify(appdata));    
+    localStorage.setItem('appdata', JSON.stringify(appdata));
     startMatching();
 }
 
@@ -198,7 +186,8 @@ function initApp() {
     console.log('init');
     listenerApp = new ListenerApp();
     loadApp();
-//    init_Matcher();
+    // FIXME:: matcher for wearable
+    //init_Matcher();
 }
 
 window.onload = function () {
@@ -207,16 +196,16 @@ window.onload = function () {
 };
 
 function startMatching() {
-//    var onSounds = _.filter(listenerApp.sounds, function (sound) { return sound.enabled; });
-//    var soundArray = _.toArray(onSounds);
-//    var samplePackages = _.pluck(soundArray, 'samplePackage');
-//    console.log('samplePackages', samplePackages);
-//    console.log("startMatching(packages, sampleMatched); length", samplePackages.length);
-//    matcher.startMatching(samplePackages, function (sampleIndex) {
-//        var sound = soundArray[sampleIndex];
-//        console.log("sample matched index:", sampleIndex, ", sound:", sound.id, sound.title);
-//        listenerApp.emit('soundMatched', sound.id);
-//    });
+    var onSounds = _.filter(listenerApp.sounds, function (sound) { return sound.enabled; });
+    var soundArray = _.toArray(onSounds);
+    var samplePackages = _.pluck(soundArray, 'samplePackage');
+    console.log('samplePackages', samplePackages);
+    console.log("startMatching(packages, sampleMatched); length", samplePackages.length);
+    matcher.startMatching(samplePackages, function (sampleIndex) {
+        var sound = soundArray[sampleIndex];
+        console.log("sample matched index:", sampleIndex, ", sound:", sound.id, sound.title);
+        listenerApp.emit('soundMatched', sound.id);
+    });
 }
 
 function stopMatching() {
@@ -245,37 +234,49 @@ function init_Matcher() {
  */
 function notification(noti) {
     try {
-        if ( isDevice() == true ) {
-            var notificationDict = {
-                    content : noti.message,
-                    iconPath : "../res/warning.png",
-                    soundPath : "",
-                    vibration : noti.vibration, // true,
-                    ledColor : noti.ledColor,   // "#FFFF00", 
-                    ledOnPeriod: 1000,
-                    ledOffPeriod : 500 };
-
-            var notification = new tizen.StatusNotification("SIMPLE", "Listener", notificationDict);
-            tizen.notification.post(notification);
-        } else {
-            var notification = '<div data-role="notification" id="'+ noti.id + '" data-type="ticker"><img src="../res/warning.png"><p>' + noti.message + '</p></div>';
-            $('#history').append(notification);
-
-            $('#'+noti.id).notification().on("click", function() { 
-                    $('#'+noti.id).remove();
-                    // FIXME: vibration and flash
-                    if ( noti.vibration == true ) {
-                        vibrate(false);
-                    }
-                });
-            $('#'+noti.id).notification('open');
-            if ( noti.vibration == true ) {
-                vibrate(true);
-            }
+        // TODO:: Don't use notification
+        // noti from history, to fix from listner page
+        function onsuccess() {
+            alert('fixme: alert and vibrate');
+            //vibrate(true);
         }
+        var app = tizen.application.getCurrentApplication();
+        tizen.application.launch(app.appInfo.id, onsuccess);
     } catch (e) {
         console.log (e.name + ": " + e.message);
     }
+/*
+        var noti = {
+                id : sound.id,
+                message : sound.title,
+                vibration : true
+        }
+        var notificationDict = {
+                content : noti.message,
+                iconPath : "../res/warning.png",
+                soundPath : "",
+                vibration : noti.vibration, // true,
+                ledColor : noti.ledColor,   // "#FFFF00", 
+                ledOnPeriod: 1000,
+                ledOffPeriod : 500 };
+
+        var notification = new tizen.StatusNotification("SIMPLE", "Listener", notificationDict);
+        tizen.notification.post(notification);*/
+/*
+        var notification = '<div data-role="notification" id="'+ noti.id + '" data-type="ticker"><img src="../res/warning.png"><p>' + noti.message + '</p></div>';
+        $('#history').append(notification);
+
+        $('#'+noti.id).notification().on("click", function() { 
+                $('#'+noti.id).remove();
+                if ( noti.vibration == true ) {
+                    vibrate(false);
+                }
+            });
+        $('#'+noti.id).notification('open');
+        if ( noti.vibration == true ) {
+            vibrate(true);
+        }
+*/
 }
 
 /**
@@ -285,80 +286,20 @@ function notification(noti) {
  */
 var timeID = null;
 function vibrate(flag) {
-    if ( isDevice() == true ) {
-        if ( flag == true ) {
-            if ( timeID != null ) {
-                clearInterval(timeID);
-                timeID = null;
-            }
-            timeID = setInterval( function() { navigator.vibrate(1000); }, 1000);
-            console.log('device vibrate on');
-        } else {
-            if ( timeID != null ) {
-                clearInterval(timeID);
-                timeID = null;
-            }
-            navigator.vibrate(0);
-            console.log('device vibrate off');
+    if ( flag == true ) {
+        if ( timeID != null ) {
+            clearInterval(timeID);
+            timeID = null;
         }
+        timeID = setInterval( function() { navigator.vibrate(1000); }, 1000);
+        console.log('device vibrate on');
     } else {
-        if ( flag == true ) {
-            if ( timeID != null ) {
-                clearInterval(timeID);
-                timeID = null;
-            }
-            timeID = setInterval( function() { parent.require('ripple/ui/plugins/goodVibrations').shakeDevice(1); }, 500);
-            console.log('simulator vibrate on');
-        } else {
-            if ( timeID != null ) {
-                clearInterval(timeID);
-                timeID = null;
-            }
-            console.log('simulator vibrate off');
+        if ( timeID != null ) {
+            clearInterval(timeID);
+            timeID = null;
         }
-    }
-}
-
-/**
- * Trigger for flash
- */
-var flashID = null;
-function flash(flag) {
-    if ( isDevice() == true ) {
-        // Nothing
-    } else {
-         if ( flag == true ) {
-             if ( flashID != null ) {
-                 clearInterval(flashID);
-                 flashID = null;
-             }
-             flashID = setInterval( function() { 
-                 setTimeout(function() {document.body.style.backgroundColor="#FF5050"; } ,1);
-                 setTimeout(function() {document.body.style.backgroundColor="#fff"; } ,500);
-             }, 800);
-             console.log('simulator flash on');
-         } else {
-             if ( flashID != null ) {
-                 clearInterval(flashID);
-                 flashID = null;
-             }
-             console.log('simulator flash off');
-         }
-     }
-}
-
-/**
- * Check for target
- */
-function isDevice() {
-    try {
-        if ( tizen instanceof Object ) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (e) {
-        return false;
+        navigator.vibrate(0);
+        console.log('device vibrate off');
     }
 }
 

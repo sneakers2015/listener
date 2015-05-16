@@ -5,13 +5,16 @@
     <title>listener</title>
     <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.min.css">
     <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="lib/tau/wearable/theme/default/tau.circle.min.css">
+
     <!-- load theme file for your application -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- app lib -->
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/underscore-min.js"></script>
+
+    <script src="lib/jquery-1.11.3.min.js"></script>
+    <script src="lib/underscore-min.js"></script>
+
     <script src="js/app.js"></script>
 </head>
+
 
 <body>
 
@@ -29,54 +32,54 @@
 
    <!-- sound list -->
     <div class="ui-page ui-page-active" id="soundlist-page">
-		<header class="ui-header">					
-			<button id="addSoundBtn" class="ui-btn">Add</button>			
-		</header>
-		<div class="ui-content">
-			<ul class="ui-listview ui-swipelist-list" id="sound-listview">
-				<li class="li-has-multiline li-has-checkbox">
-					<label>
-						Wi-fi
-						<span class="ui-li-sub-text li-text-sub">Sub text</span>
-						<input type="checkbox"/>
-					</label>
-				</li>
-				 <li class="li-has-multiline li-has-checkbox">
-					<label>
-						Bluetooth
-						<span class="ui-li-sub-text li-text-sub">Sub text</span>
-						<input type="checkbox"/>
-					</label>
-				</li>				 
-				<li class="li-has-multiline li-has-checkbox">
-					<label>
-						Flight mode
-						<span class="ui-li-sub-text li-text-sub">Sub text</span>
-						<input type="checkbox"/>
-					</label>
-				</li>
-			</ul>		
-			<div class="ui-swipelist">
-				<div class="ui-swipelist-left">					
-					<div class="ui-swipelist-text">Modify...</div>
-				</div>
-				<div class="ui-swipelist-right">					
-					<div class="ui-swipelist-text">Delete...</div>
-				</div>
-			</div>	
-			<div id="sound-delete-popup" class="ui-popup">   				
-   				<div class="ui-popup-content">
-      			Delete the sound?
-   				</div>
-   				<div class="ui-popup-footer ui-grid-col-2">
-      			<div class="ui-popup-footer ui-side-button ui-grid-col-2">
-				<a id="sound-delete-popup-cancel" href="#" class="ui-btn btn-icon-cancel">Cancel</a>
-				<a id="sound-delete-popup-ok" href="#" class="ui-btn btn-icon-check">OK</a>
-				</div>
-   				</div>
-			</div>
-		</div>	  
-	</div>	
+        <header class="ui-header">
+            <button id="addSoundBtn" class="ui-btn">Add</button>
+        </header>
+        <div class="ui-content">
+            <ul class="ui-listview ui-swipelist-list" id="sound-listview">
+                <li class="li-has-multiline li-has-checkbox">
+                    <label>
+                        Wi-fi
+                        <span class="ui-li-sub-text li-text-sub">Sub text</span>
+                        <input type="checkbox"/>
+                    </label>
+                </li>
+                 <li class="li-has-multiline li-has-checkbox">
+                    <label>
+                        Bluetooth
+                        <span class="ui-li-sub-text li-text-sub">Sub text</span>
+                        <input type="checkbox"/>
+                    </label>
+                </li>
+                <li class="li-has-multiline li-has-checkbox">
+                    <label>
+                        Flight mode
+                        <span class="ui-li-sub-text li-text-sub">Sub text</span>
+                        <input type="checkbox"/>
+                    </label>
+                </li>
+            </ul>
+            <div class="ui-swipelist">
+                <div class="ui-swipelist-left">
+                    <div class="ui-swipelist-text">Modify...</div>
+                </div>
+                <div class="ui-swipelist-right">
+                    <div class="ui-swipelist-text">Delete...</div>
+                </div>
+            </div>
+            <div id="sound-delete-popup" class="ui-popup">
+                   <div class="ui-popup-content">
+                  Delete the sound?
+                   </div>
+                   <div class="ui-popup-footer ui-grid-col-2">
+                  <div class="ui-popup-footer ui-side-button ui-grid-col-2">
+                <a id="sound-delete-popup-cancel" href="#" class="ui-btn btn-icon-cancel">Cancel</a>
+                <a id="sound-delete-popup-ok" href="#" class="ui-btn btn-icon-check">OK</a>
+                </div>
+                   </div>
+            </div>
+        </div>
+    </div>
 
     <!-- new sound page -->
     <div class="ui-page" id="new">
@@ -155,11 +158,8 @@
     <script type="text/javascript" src="lib/tau/wearable/js/tau.min.js"></script>
     <script type="text/javascript" src="js/util/circle-helper.js"></script>
     <script type="text/javascript" src="js/util/lowBatteryCheck.js"></script>
-    <script type="text/javascript" src="js/util/homeExit.js"></script>
 
     <!-- FIXME:: -->
-    <script src="js/notification.js"></script>
-    
     <script src="js/soundlist-controls.js"></script>
 </body>
 </html>
