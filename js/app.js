@@ -65,6 +65,8 @@ function stop() {
  * @class
  */
 function Sound(id, title, enabled, soundData, samplePackage, notiEnabled, dialNumber, message) {
+    console.log('Sound: ' + 'id: ' + id + ' title: ' + title + ' enabled: ' + enabled + 'soundData: ' + soundData +
+            ' samplepackage: ' + samplePackage + ' notiEnabled: ' + notiEnabled + ' dialNumber: ' + dialNumber + ' message: ' + message);
     this.id = id;
     this.title = title;
     this.enabled = enabled;
@@ -112,6 +114,7 @@ function addNewSound(title, soundData, samplePackage, dialNumber, message) {
 }
 
 function getSoundByID(soundID) {
+    console.log('getSoundByID: ' + soundID);
     for (var i in listenerApp.sounds) {
         var sound = listenerApp.sounds[i];
         if (sound.id == soundID) {
@@ -126,9 +129,9 @@ function getSoundByID(soundID) {
  */
 function changeSound(soundID, soundObject) {
     var sound = getSoundByID(soundID);
-    console.log('changeSound', sound, soundObject);
+    console.log('changeSound: ' + 'sound: ' + sound + 'soundObject: ' + soundObject);
     if (!sound) {
-        console.error('changeSound soundID not found:', soundID);
+        console.error('changeSound soundID not found: ' + soundID);
         return false;
     }
     soundObject = _.pick(soundObject, 'title', 'soundData', 'samplePackage', 'enabled', 'alertMethods', 'notiEnabled', '_dialNumber', '_message');
@@ -141,6 +144,7 @@ function changeSound(soundID, soundObject) {
  * Delete sound
  */
 function deleteSound(soundID) {
+    console.log('deleteSound: ' + soundID);
     for (var i in listenerApp.sounds ) {
         var sound = listenerApp.sounds[i];
         if (sound.id == soundID) {
@@ -158,12 +162,12 @@ function deleteSound(soundID) {
  */
 function loadApp() {
     console.log('load');
-    console.log('get appdata', localStorage.appdata);
-    console.log('before load listenerApp', listenerApp)
+    console.log('get appdata: ' + localStorage.appdata);
+    console.log('before load listenerApp: ' + listenerApp)
     if (localStorage.appdata) {
         _.extend(listenerApp, JSON.parse(localStorage.appdata));
     }
-    console.log('after load listenerApp', listenerApp)
+    console.log('after load listenerApp: ' + listenerApp)
 }
 
 /**
@@ -174,7 +178,7 @@ function loadApp() {
 function saveApp() {
     console.log('save');
     var appdata = _.pick(listenerApp, 'sounds', 'settings');
-    console.log('appdata', appdata);
+    console.log('appdata: ' + appdata);
     localStorage.setItem('appdata', JSON.stringify(appdata));
     startMatching();
 }
@@ -236,6 +240,7 @@ function init_Matcher() {
  * }
  */
 function notification(noti) {
+    console.log('notification: ' + noti);
     try {
         // TODO:: Don't use notification
         // noti from history, to fix from listner page
