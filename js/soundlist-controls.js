@@ -56,6 +56,7 @@ var SoundListControl = (function() {
     }
 
     function removeSoundListItem (id) {
+    	console.log('removeSoundListItem');
         var listItem = listElement.querySelector('#' + id);
         if (listItem) {
             console.log('list item deleted', listItem);

@@ -36,7 +36,6 @@ function ListenerApp() {
     this.sounds = {}; // soundID -> Sound map
     this.currentState = 'stopped'; // 'stopped' | 'running'
     this.history = []; // Alert list
-    this.settings = {showSoundIcons: true};
     this.addNewSound = addNewSound;
     this.deleteSound = deleteSound;
 }
@@ -158,7 +157,7 @@ function deleteSound(soundID) {
 }
 
 /**
- * load saved app data (sounds, settings, etc)
+ * load saved app data (sounds, etc)
  */
 function loadApp() {
     console.log('load');
@@ -166,20 +165,21 @@ function loadApp() {
     console.log('before load listenerApp: ' + listenerApp)
     if (localStorage.appdata) {
         _.extend(listenerApp, JSON.parse(localStorage.appdata));
+        // update sound list
         SoundListControl.updateSoundList();
     }
     console.log('after load listenerApp: ' + listenerApp)
 }
 
 /**
- * save app data (sounds, settings, etc)
+ * save app data (sounds, etc)
  *
  * call this when something that should be saved is changed
  */
 function saveApp() {
     console.log('save');
     SoundListControl.updateSoundList();
-    var appdata = _.pick(listenerApp, 'sounds', 'settings');
+    var appdata = _.pick(listenerApp, 'sounds');
     console.log('appdata: ' + appdata);
     localStorage.setItem('appdata', JSON.stringify(appdata));
     startMatching();
