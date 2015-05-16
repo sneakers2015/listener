@@ -192,8 +192,7 @@ function initApp() {
     console.log('init');
     listenerApp = new ListenerApp();
     loadApp();
-    // FIXME:: matcher for wearable
-    //init_Matcher();
+    init_Matcher();
 }
 
 window.onload = function () {
@@ -202,19 +201,16 @@ window.onload = function () {
 };
 
 function startMatching() {
-// FIXME:: matcher for wearable
-/*
     var onSounds = _.filter(listenerApp.sounds, function (sound) { return sound.enabled; });
     var soundArray = _.toArray(onSounds);
     var samplePackages = _.pluck(soundArray, 'samplePackage');
-    console.log('samplePackages', samplePackages);
-    console.log("startMatching(packages, sampleMatched); length", samplePackages.length);
+    console.log('samplePackages: ' + samplePackages);
+    console.log("startMatching(packages, sampleMatched); length: " + samplePackages.length);
     matcher.startMatching(samplePackages, function (sampleIndex) {
         var sound = soundArray[sampleIndex];
-        console.log("sample matched index:", sampleIndex, ", sound:", sound.id, sound.title);
+        console.log("sample matched index: " + sampleIndex + ", sound: " + sound.id +' , '+ sound.title);
         listenerApp.emit('soundMatched', sound.id);
     });
-*/
 }
 
 function stopMatching() {
