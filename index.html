@@ -7,12 +7,15 @@
     <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="lib/tau/wearable/theme/default/tau.circle.min.css">
     <!-- load theme file for your application -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- app lib -->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/underscore-min.js"></script>
 </head>
 
 <body>
 
     <!-- intro page -->
-    <div class="ui-page ui-page-active" id="intro">
+    <div class="ui-page" id="intro">
         <header class="ui-header">
             <h2 class="ui-title">intro title</h2>
         </header>
@@ -23,20 +26,59 @@
         </div>
     </div>
 
-    <!-- list page -->
-    <div class="ui-page ui-page-active" id="list">
-        <header class="ui-header">
-            <h2 class="ui-title">소리목록</h2>
-        </header>
-        <div class="ui-content content-padding">
-            <ul class="ui-listview">
-                <p>소리목록(On/Off), 소리수정(swipe), 소리삭제(swipe)</p>
-            </ul>
-        </div>
-    </div>
+   <!-- sound list -->
+    <div class="ui-page ui-page-active" id="soundlist-page">
+		<header class="ui-header">					
+			<button id="addSoundBtn" class="ui-btn">Add</button>			
+		</header>
+		<div class="ui-content">
+			<ul class="ui-listview ui-swipelist-list" id="sound-listview">
+				<li class="li-has-multiline li-has-checkbox">
+					<label>
+						Wi-fi
+						<span class="ui-li-sub-text li-text-sub">Sub text</span>
+						<input type="checkbox"/>
+					</label>
+				</li>
+				 <li class="li-has-multiline li-has-checkbox">
+					<label>
+						Bluetooth
+						<span class="ui-li-sub-text li-text-sub">Sub text</span>
+						<input type="checkbox"/>
+					</label>
+				</li>				 
+				<li class="li-has-multiline li-has-checkbox">
+					<label>
+						Flight mode
+						<span class="ui-li-sub-text li-text-sub">Sub text</span>
+						<input type="checkbox"/>
+					</label>
+				</li>
+			</ul>		
+			<div class="ui-swipelist">
+				<div class="ui-swipelist-left">					
+					<div class="ui-swipelist-text">Modify...</div>
+				</div>
+				<div class="ui-swipelist-right">					
+					<div class="ui-swipelist-text">Delete...</div>
+				</div>
+			</div>	
+			<div id="sound-delete-popup" class="ui-popup">   				
+   				<div class="ui-popup-content">
+      			Delete the sound?
+   				</div>
+   				<div class="ui-popup-footer ui-grid-col-2">
+      			<div class="ui-popup-footer ui-side-button ui-grid-col-2">
+				<a id="sound-delete-popup-cancel" href="#" class="ui-btn btn-icon-cancel">Cancel</a>
+				<a id="sound-delete-popup-ok" href="#" class="ui-btn btn-icon-check">OK</a>
+				</div>
+   				</div>
+			</div>
+		</div>	  
+	</div>	
 
     <!-- new sound page -->
-    <div class="ui-page ui-page-active" id="new">
+    <div class="ui-page" id="new">
         <header class="ui-header">
             <h2 class="ui-title">소리등록</h2>
         </header>
@@ -48,7 +90,7 @@
     </div>
 
     <!-- new sound info page -->
-    <div class="ui-page ui-page-active" id="newInfo">
+    <div class="ui-page" id="newInfo">
         <header class="ui-header">
             <h2 class="ui-title">정보입력</h2>
         </header>
@@ -60,7 +102,7 @@
     </div>
 
     <!-- edit sound page -->
-    <div class="ui-page ui-page-active" id="edit">
+    <div class="ui-page" id="edit">
         <header class="ui-header">
             <h2 class="ui-title">소리수정</h2>
         </header>
@@ -72,7 +114,7 @@
     </div>
 
     <!-- history page -->
-    <div class="ui-page ui-page-active" id="edit">
+    <div class="ui-page" id="edit">
         <header class="ui-header">
             <h2 class="ui-title">소리기록</h2>
         </header>
@@ -84,7 +126,7 @@
     </div>
 
     <!-- alarm page -->
-    <div class="ui-page ui-page-active" id="alarm">
+    <div class="ui-page" id="alarm">
         <header class="ui-header">
             <h2 class="ui-title">백그라운드 알림</h2>
         </header>
@@ -96,7 +138,7 @@
     </div>
 
     <!-- send alarm page -->
-    <div class="ui-page ui-page-active" id="send">
+    <div class="ui-page" id="send">
         <header class="ui-header">
             <h2 class="ui-title">전송확인</h2>
         </header>
@@ -114,11 +156,9 @@
     <script type="text/javascript" src="js/util/lowBatteryCheck.js"></script>
     <script type="text/javascript" src="js/util/homeExit.js"></script>
 
-    <!-- app lib -->
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/underscore-min.js"></script>
-
     <!-- FIXME:: -->
     <script src="js/notification.js"></script>
+    
+    <script src="js/soundlist-controls.js"></script>
 </body>
 </html>
