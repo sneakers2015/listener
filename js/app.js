@@ -26,9 +26,9 @@ var listenerApp;
 
 /**
  * Listener App model
- * 
+ *
  * Emit 'soundMatched' event when sound is matched.
- * 
+ *
  * @class
  * @extends {jQuery.eventEmitter}
  */
@@ -85,7 +85,7 @@ function generateNewSoundID() {
     var maxid = 0;
     for(var i in listenerApp.sounds) {
         var sound = listenerApp.sounds[i];
-        maxid = (sound.id > maxid) ? sound.id : maxid; 
+        maxid = (sound.id > maxid) ? sound.id : maxid;
     }
     return maxid + 1;
 }
@@ -107,7 +107,7 @@ function addNewSound(title, soundData, samplePackage, dialNumber, message) {
     if (message !== undefined) {
         _message = message;
     }
-    var newSound = new Sound(newid, title, true, soundData, samplePackage, true, _dialNumber, _message);  
+    var newSound = new Sound(newid, title, true, soundData, samplePackage, true, _dialNumber, _message);
     listenerApp.sounds[newid] = newSound;
     saveApp();
     return newSound;
@@ -166,17 +166,19 @@ function loadApp() {
     console.log('before load listenerApp: ' + listenerApp)
     if (localStorage.appdata) {
         _.extend(listenerApp, JSON.parse(localStorage.appdata));
+        SoundListControl.updateSoundList();
     }
     console.log('after load listenerApp: ' + listenerApp)
 }
 
 /**
  * save app data (sounds, settings, etc)
- * 
+ *
  * call this when something that should be saved is changed
  */
 function saveApp() {
     console.log('save');
+    SoundListControl.updateSoundList();
     var appdata = _.pick(listenerApp, 'sounds', 'settings');
     console.log('appdata: ' + appdata);
     localStorage.setItem('appdata', JSON.stringify(appdata));
@@ -231,7 +233,7 @@ function init_Matcher() {
 
 /**
  * Notification wrapper
- * 
+ *
  * notification {
  *     id,
  *  message,
@@ -264,7 +266,7 @@ function notification(noti) {
                 iconPath : "../res/warning.png",
                 soundPath : "",
                 vibration : noti.vibration, // true,
-                ledColor : noti.ledColor,   // "#FFFF00", 
+                ledColor : noti.ledColor,   // "#FFFF00",
                 ledOnPeriod: 1000,
                 ledOffPeriod : 500 };
 
@@ -274,7 +276,7 @@ function notification(noti) {
         var notification = '<div data-role="notification" id="'+ noti.id + '" data-type="ticker"><img src="../res/warning.png"><p>' + noti.message + '</p></div>';
         $('#history').append(notification);
 
-        $('#'+noti.id).notification().on("click", function() { 
+        $('#'+noti.id).notification().on("click", function() {
                 $('#'+noti.id).remove();
                 if ( noti.vibration == true ) {
                     vibrate(false);
@@ -289,7 +291,7 @@ function notification(noti) {
 
 /**
  * Trigger for vibrate
- * 
+ *
  * @see http://www.w3.org/TR/2012/WD-vibration-20120202/
  */
 var timeID = null;
