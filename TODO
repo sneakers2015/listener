@@ -1,2 +1,0 @@
-* Send Message: Notification API가 없기때문에 문자를 보낼 방안이 없음. Mobile을 이용한 Send Message를 해야하는가?
-* LocalStorage 는 앱이 종료되면 사라짐. 그냥 앱이 종료상관없이 고고? - 최종앱에다가 음성을 넣은뒤로는 다시 인스톨 패키징하면 다 사라질수 있음
