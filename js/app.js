@@ -93,6 +93,9 @@ function generateNewSoundID() {
  * Add new sound
  * @param title
  * @param soundData
+ * @param samplePackage
+ * @param dialNumber
+ * @param message
  * @returns {Sound}
  */
 function addNewSound(title, soundData, samplePackage, dialNumber, message) {
@@ -234,19 +237,19 @@ function init_Matcher() {
  *
  * notification {
  *     id,
- *  message,
- *  vibration,
- *  ledColor,
+ *     title,
+ *     dialNumber,
+ *     message,
  * }
  */
 function notification(noti) {
-    console.log('notification: ' + noti.id + ' : ' + noti.message + ' : ' + noti.vibration + ' : ' + noti.ledColor);
+    console.log('notification: ' + noti.id + ' : ' + noti.title + ' : ' + noti.dialNumber + ' : ' + noti.message);
     try {
         // TODO::
         // noti from history, to fix from listner page
         function onsuccess() {
             // FIXME::
-            alert('notification: ' + noti.id + ' : ' + noti.message);
+            alert('notification: ' + noti.id + ' : ' + noti.title);
             //vibrate(true);
             //vibrate(false);
         }
