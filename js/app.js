@@ -38,6 +38,7 @@ function ListenerApp() {
     this.history = []; // Alert list
     this.addNewSound = addNewSound;
     this.deleteSound = deleteSound;
+    this.getSoundById = getSoundByID;
 }
 
 jQuery.extend(ListenerApp.prototype, jQuery.eventEmitter);

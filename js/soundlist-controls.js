@@ -3,7 +3,7 @@ var SoundListControl = (function() {
 
     var page = document.getElementById( "soundlist-page" );
     var recordingSoundPage = document.getElementById( "recording-sound-page" );
-    var modifySoundPage = document.getElementById("page-sound-info");
+    var pageSoundInfo = document.getElementById( "page-sound-info" );
     var listElement = page.querySelector("#sound-listview" );
 
     var btn_addSound = page.querySelector( "#addSoundBtn" );
@@ -94,8 +94,9 @@ var SoundListControl = (function() {
         console.log('list matchHandler: ' + soundID);
         blink(getSoundItemFromID(soundID));
     }
-    function showModifyPage (soundID) {
-    	tau.changePage(modifySoundPage);
+    function openModifyPage (soundID) {
+    	SoundInfoControl.openModifySoundPage(soundID);
+//    	tau.changePage(modifySoundPage);
     }
 
     listElement.addEventListener("swipelist.right", function(evt) {
@@ -109,7 +110,7 @@ var SoundListControl = (function() {
     listElement.addEventListener("swipelist.left", function(evt) {
     	console.log('swipe left', evt.target);
     	var id = evt.target.id;
-    	showModifyPage (id);
+    	openModifyPage (id);
    });
 
     page.addEventListener( "pageshow", function() {

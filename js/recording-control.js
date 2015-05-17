@@ -58,6 +58,6 @@ var RecordingControlUI = (function() {
     });
 
     return {
-    	RecordingControlUI: RecordingControlUI
+    	
     }
 }());

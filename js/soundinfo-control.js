@@ -7,13 +7,45 @@ var SoundInfoControl = (function() {
     
     var btn_ok = page.querySelector( "#page-sound-info-btn-ok" );
     var btn_cancel = page.querySelector( "#page-sound-info-btn-cancel" );
+    var input_title = page.querySelector("#page-sound-info-nametag-input");
+    var input_phone = page.querySelector("#page-sound-info-call-input");
+    var input_message = page.querySelector("#page-sound-info-message-input");
+        
+    var currentSound = null;
+    
+    var openModifySoundPage = function (id) {
+    	currentSound = listenerApp.getSoundById(id);
+    	if (currentSound) {
+    		tau.changePage(page);
+    		_setValues(currentSound.title, currentSound.dialNumber, currentSound.message);    		
+    	}
+    }
     
     function _handleOk () {
-    	tau.changePage(soundlistPage);
+    	if (currentSound) {
+    		currentSound.title = input_title.value;
+    		currentSound.dialNumber = input_phone.value;
+    		currentSound.message = input_message.value;
+    	}
+    	currentSound = null;
+    	tau.changePage(soundlistPage);    	
     }
     
     function _handleCancel () {
-    	tau.back();
+    	currentSound = null;
+    	tau.back();    	
+    }
+    
+    function _setValues (title, dial, message) {
+    	if (title) {
+    		input_title.value = title;
+    	}
+    	if (dial) {
+    		input_phone.value = dial;
+    	}
+    	if (message) {
+    		input_message.value = message;
+    	}
     }
     
     btn_ok.addEventListener('click', function(ev) {
@@ -25,6 +57,6 @@ var SoundInfoControl = (function() {
     });
 
     return {
-    	SoundInfoControl: SoundInfoControl
+    	openModifySoundPage: openModifySoundPage
     }
 }());
