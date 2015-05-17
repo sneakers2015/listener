@@ -182,7 +182,8 @@ function saveApp() {
     var appdata = _.pick(listenerApp, 'sounds');
     console.log('appdata: ' + appdata);
     localStorage.setItem('appdata', JSON.stringify(appdata));
-    startMatching();
+    // FIMXE:: for wearable
+    //startMatching();
 }
 
 /**
@@ -192,7 +193,8 @@ function initApp() {
     console.log('init');
     listenerApp = new ListenerApp();
     loadApp();
-    init_Matcher();
+    // FIMXE:: for wearable
+    //init_Matcher();
 }
 
 window.onload = function () {
