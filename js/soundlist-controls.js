@@ -24,7 +24,7 @@ var SoundListControl = (function() {
         }
         refreshSwipeList();
     }
-    
+
     function addSoundListItem (id, title, enabled, dialNumber) {
         console.log('addSoundListItem');
         var li, label, span, input;
@@ -95,35 +95,31 @@ var SoundListControl = (function() {
         blink(getSoundItemFromID(soundID));
     }
     function showModifyPage (soundID) {
-    	tau.changePage(modifySoundPage);
+        tau.changePage(modifySoundPage);
     }
 
     listElement.addEventListener("swipelist.right", function(evt) {
-      console.log('swipe right', evt.target);
-      var list = evt.currentTarget;
-      var target = evt.target; 
-      deleteTargetElem = target;
-      tau.openPopup(soundDeletePopup);
+        console.log('swipe right', evt.target);
+        var list = evt.currentTarget;
+        var target = evt.target;
+        deleteTargetElem = target;
+        tau.openPopup(soundDeletePopup);
     });
-    
+
     listElement.addEventListener("swipelist.left", function(evt) {
-    	console.log('swipe left', evt.target);
-    	var id = evt.target.id;
-    	showModifyPage (id);
+        console.log('swipe left', evt.target);
+        var id = evt.target.id;
+        showModifyPage (id);
    });
 
     page.addEventListener( "pageshow", function() {
         console.log('pageshow');
         listenerApp.on('soundMatched', listMatchHandler);
+        updateSoundList();
     });
 
     page.addEventListener( "pagebeforeshow", function() {
         console.log('pagebeforeshow');
-        updateSoundList();
-    });
-     
-    page.addEventListener( "pagebeforeshow", function() {
-    	updateSoundList();
     });
 
     document.getElementById('sound-delete-popup-cancel').addEventListener('click', function(ev) {
@@ -147,18 +143,14 @@ var SoundListControl = (function() {
         listenerApp.off('soundMatched', listMatchHandler);
 
         // release object
-    	if (swipeList) {
-    		swipeList.destroy();
-    		swipeList = null;
-    	}        
+        if (swipeList) {
+            swipeList.destroy();
+            swipeList = null;
+        }
     });
 
     document.getElementById('addSoundBtn').addEventListener('click', function(ev) {
-        // FIXME:: test code
-    	tau.changePage(recordingSoundPage);
-//        var random = _.random(0, 100);
-//        addNewSound('test'+random, null, null, random, 'msg');
-//        updateSoundList();
+        tau.changePage(recordingSoundPage);
     });
 
     return {
