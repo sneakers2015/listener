@@ -252,6 +252,7 @@ function notification(noti) {
             alert('notification: ' + noti.id + ' : ' + noti.title);
             //vibrate(true);
             //vibrate(false);
+            //sendSMS
         }
         var app = tizen.application.getCurrentApplication();
         tizen.application.launch(app.appInfo.id, onsuccess);
@@ -296,6 +297,20 @@ function vibrate(flag) {
         navigator.vibrate(0);
         console.log('device vibrate off');
     }
+}
+
+/**
+ * Send SMS
+ *
+ * @see http://tools.ietf.org/html/rfc5724
+ */
+function sendSMS(number, msg) {
+    // FIXME:: need to test
+    // <a href="sms:+19725551212?body=hellow">SMS Me</a>
+    // http://stackoverflow.com/questions/4787905/sms-url-on-android
+    //window.location.href="sms:+19725551212?body=hellow";
+    var sms = 'sms:+' + number + '?body=' + msg;
+    window.location.href = sms;
 }
 
 /**
