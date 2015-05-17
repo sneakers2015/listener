@@ -2,6 +2,7 @@ var SoundListControl = (function() {
     console.log('init');
 
     var page = document.getElementById( "soundlist-page" );
+    var recordingSoundPage = document.getElementById( "recording-sound-page" );
     var listElement = page.querySelector("#sound-listview" );
 
     var btn_addSound = page.querySelector( "#addSoundBtn" );
@@ -22,7 +23,7 @@ var SoundListControl = (function() {
         }
         refreshSwipeList();
     }
-
+    
     function addSoundListItem (id, title, enabled, dialNumber) {
     	console.log('addSoundListItem');
         var li, label, span, input;
@@ -74,7 +75,8 @@ var SoundListControl = (function() {
     	}
     	swipeList = tau.widget.SwipeList( listElement, {
             swipeTarget: "li",
-            swipeElement: ".ui-swipelist"
+            swipeElement: ".ui-swipelist",
+            rtlStartColor : "#FF2200",
                 /*
                  * ltrStartColor : #xx
                  * ltrEndColor : #xx
@@ -84,38 +86,23 @@ var SoundListControl = (function() {
         }); 
     }
 
+    listElement.addEventListener("swipelist.right", function(evt) {
+      console.log('swipe right', evt.target);
+      var list = evt.currentTarget;
+      var target = evt.target; 
+      deleteTargetElem = target;
+      tau.openPopup(soundDeletePopup);
+    });
+    
+    listElement.addEventListener("swipelist.left", function(evt) {
+    	console.log('swipe left', event,target);
+
+   });
+
+
+    	
     page.addEventListener( "pagebeforeshow", function() {
-        // make SwipeList object
-//        swipeList = tau.widget.SwipeList( listElement, {
-//            swipeTarget: "li",
-//            swipeElement: ".ui-swipelist"
-//                /*
-//                 * ltrStartColor : #xx
-//                 * ltrEndColor : #xx
-//                 * rtlStartColor : #xx
-//                 * rtlEndColor : #xx
-//                 */
-//        });
-
-        listElement.addEventListener("swipelist.right", function(evt) {
-            console.log('swipe right', evt.target);
-            var list = evt.currentTarget;
-            tau.openPopup(soundDeletePopup);
-            var target = evt.target; //list 항목
-            deleteTargetElem = target;
-            // target.remove(); //제거
-            var type = evt.type; //swipelist.left
-        });
-
-        listElement.addEventListener("swipelist.left", function(evt) {
-            console.log('swipe left', evt.target);
-            var list = evt.currentTarget;
-    //        tau.openPopup(soundDeletePopup);
-    //        var target = evt.target; //list 항목
-    //        deleteTargetElem = target;
-    //        var type = evt.type; //swipelist.left
-        });
-
+    	updateSoundList();
     });
 
     document.getElementById('sound-delete-popup-cancel').addEventListener('click', function(ev) {
@@ -133,14 +120,18 @@ var SoundListControl = (function() {
 
     page.addEventListener( "pagebeforehide", function() {
         // release object
-        swipeList.destroy();
+    	if (swipeList) {
+    		swipeList.destroy();
+    		swipeList = null;
+    	}        
     });
 
     document.getElementById('addSoundBtn').addEventListener('click', function(ev) {
         // FIXME:: test code
-        var random = _.random(0, 100);
-        addNewSound('test'+random, null, null, random, 'msg');
-        updateSoundList();
+    	tau.changePage(recordingSoundPage);
+//        var random = _.random(0, 100);
+//        addNewSound('test'+random, null, null, random, 'msg');
+//        updateSoundList();
     });
 
     return {

@@ -1,0 +1,28 @@
+#rcording-sound-page-content
+{
+	background-color : red;	
+}
+
+#recording-page-play-btn 
+{		
+	opacity : 1.0;
+	width : 100px;
+	height: 100px;
+	margin : auto;
+	margin-top : 20px;
+}
+
+.recording-btn-recording 
+{
+	background-image: url(../res/images/btn_stop.png);
+}
+
+.recording-btn-normal
+{
+	background-image: url(../res/images/btn_play.png);
+}
+
+#recording-page-play-btn:active 
+{			
+	opacity : 0.8;
+}
