@@ -93,6 +93,9 @@ function generateNewSoundID() {
  * Add new sound
  * @param title
  * @param soundData
+ * @param samplePackage
+ * @param dialNumber
+ * @param message
  * @returns {Sound}
  */
 function addNewSound(title, soundData, samplePackage, dialNumber, message) {
@@ -182,7 +185,8 @@ function saveApp() {
     var appdata = _.pick(listenerApp, 'sounds');
     console.log('appdata: ' + appdata);
     localStorage.setItem('appdata', JSON.stringify(appdata));
-    startMatching();
+    // FIMXE:: for wearable
+    //startMatching();
 }
 
 /**
@@ -192,7 +196,8 @@ function initApp() {
     console.log('init');
     listenerApp = new ListenerApp();
     loadApp();
-    init_Matcher();
+    // FIMXE:: for wearable
+    //init_Matcher();
 }
 
 window.onload = function () {
@@ -232,19 +237,21 @@ function init_Matcher() {
  *
  * notification {
  *     id,
- *  message,
- *  vibration,
- *  ledColor,
+ *     title,
+ *     dialNumber,
+ *     message,
  * }
  */
 function notification(noti) {
-    console.log('notification: ' + noti);
+    console.log('notification: ' + noti.id + ' : ' + noti.title + ' : ' + noti.dialNumber + ' : ' + noti.message);
     try {
-        // TODO:: Don't use notification
+        // TODO::
         // noti from history, to fix from listner page
         function onsuccess() {
-            alert('fixme: alert and vibrate');
+            // FIXME::
+            alert('notification: ' + noti.id + ' : ' + noti.title);
             //vibrate(true);
+            //vibrate(false);
         }
         var app = tizen.application.getCurrentApplication();
         tizen.application.launch(app.appInfo.id, onsuccess);
@@ -252,36 +259,18 @@ function notification(noti) {
         console.log (e.name + ": " + e.message);
     }
 /*
-        var noti = {
-                id : sound.id,
-                message : sound.title,
-                vibration : true
-        }
-        var notificationDict = {
-                content : noti.message,
-                iconPath : "../res/warning.png",
-                soundPath : "",
-                vibration : noti.vibration, // true,
-                ledColor : noti.ledColor,   // "#FFFF00",
-                ledOnPeriod: 1000,
-                ledOffPeriod : 500 };
-
-        var notification = new tizen.StatusNotification("SIMPLE", "Listener", notificationDict);
-        tizen.notification.post(notification);*/
-/*
-        var notification = '<div data-role="notification" id="'+ noti.id + '" data-type="ticker"><img src="../res/warning.png"><p>' + noti.message + '</p></div>';
-        $('#history').append(notification);
-
-        $('#'+noti.id).notification().on("click", function() {
-                $('#'+noti.id).remove();
-                if ( noti.vibration == true ) {
-                    vibrate(false);
-                }
-            });
-        $('#'+noti.id).notification('open');
-        if ( noti.vibration == true ) {
-            vibrate(true);
-        }
+    var notification = '<div data-role="notification" id="'+ noti.id + '" data-type="ticker"><img src="../res/warning.png"><p>' + noti.message + '</p></div>';
+    $('#history').append(notification);
+    $('#'+noti.id).notification().on("click", function() {
+            $('#'+noti.id).remove();
+            if ( noti.vibration == true ) {
+                vibrate(false);
+            }
+        });
+    $('#'+noti.id).notification('open');
+    if ( noti.vibration == true ) {
+        vibrate(true);
+    }
 */
 }
 

@@ -14,7 +14,7 @@ var SoundListControl = (function() {
     var swipeList = null; //dynamic create
 
     function updateSoundList () {
-    	console.log('updateSoundList');
+        console.log('updateSoundList');
         var soundListView = $('#sound-listview');
         soundListView.children().remove();
         for (var i in listenerApp.sounds) {
@@ -25,7 +25,7 @@ var SoundListControl = (function() {
     }
     
     function addSoundListItem (id, title, enabled, dialNumber) {
-    	console.log('addSoundListItem');
+        console.log('addSoundListItem');
         var li, label, span, input;
         li = document.createElement('li')
         label = document.createElement('label');
@@ -58,7 +58,7 @@ var SoundListControl = (function() {
     }
 
     function removeSoundListItem (id) {
-    	console.log('removeSoundListItem');
+        console.log('removeSoundListItem');
         var listItem = listElement.querySelector('#' + id);
         if (listItem) {
             console.log('list item deleted', listItem);
@@ -67,13 +67,13 @@ var SoundListControl = (function() {
         }
         return false;
     }
-    
+
     function refreshSwipeList () {
-    	if (swipeList) {
-    		swipeList.destroy();
-    		swipeList = null;
-    	}
-    	swipeList = tau.widget.SwipeList( listElement, {
+        if (swipeList) {
+            swipeList.destroy();
+            swipeList = null;
+        }
+        swipeList = tau.widget.SwipeList( listElement, {
             swipeTarget: "li",
             swipeElement: ".ui-swipelist",
             rtlStartColor : "#FF2200",
@@ -83,7 +83,15 @@ var SoundListControl = (function() {
                  * rtlStartColor : #xx
                  * rtlEndColor : #xx
                  */
-        }); 
+        });
+    }
+
+    function getSoundItemFromID(soundID) {
+        return $('#sound-listview li[id=' + soundID +']')[0];
+    }
+    function listMatchHandler(event, soundID) {
+        console.log('list matchHandler: ' + soundID);
+        blink(getSoundItemFromID(soundID));
     }
 
     listElement.addEventListener("swipelist.right", function(evt) {
@@ -99,8 +107,16 @@ var SoundListControl = (function() {
 
    });
 
+    page.addEventListener( "pageshow", function() {
+        console.log('pageshow');
+        listenerApp.on('soundMatched', listMatchHandler);
+    });
 
-    	
+    page.addEventListener( "pagebeforeshow", function() {
+        console.log('pagebeforeshow');
+        updateSoundList();
+    });
+     
     page.addEventListener( "pagebeforeshow", function() {
     	updateSoundList();
     });
@@ -119,6 +135,12 @@ var SoundListControl = (function() {
     });
 
     page.addEventListener( "pagebeforehide", function() {
+        console.log('pagebeforehide');
+
+        // release handler
+        console.log('off listMatchHandler');
+        listenerApp.off('soundMatched', listMatchHandler);
+
         // release object
     	if (swipeList) {
     		swipeList.destroy();
