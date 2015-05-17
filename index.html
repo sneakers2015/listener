@@ -92,17 +92,42 @@
     </div>
 
     <!-- new sound info page -->
-    <div class="ui-page" id="newInfo">
+    <div class="ui-page" id="page-sound-info">
         <header class="ui-header">
-            <h2 class="ui-title">정보입력</h2>
+            <h2 class="ui-title">Modify</h2>
         </header>
         <div class="ui-content content-padding">
-            <ul class="ui-listview">
-                <p>이름입력, 전송번호입력, 전송메시지입력, [완료]</p>
-            </ul>
+        	<div class="sound-info-container">
+        	<div class="sound-info-item">
+        		<div class="sound-info-item-title icon-nametag">
+        		</div>
+        		<input class="sound-info-item-input">
+        		</input>
+        	</div>
+        	<div class="sound-info-item">
+        		<div class="sound-info-item-title icon-call">
+        		</div>
+        		<input class="sound-info-item-input">
+        		</input>
+        	</div>
+        	<div class="sound-info-item">
+        		<div class="sound-info-item-title icon-message">
+        		</div>
+        		<input class="sound-info-item-input">
+        		</input>
+        	</div>
+        	</div>        	            
         </div>
+        <footer class="ui-footer ui-grid-col-2 ui-fixed app-ui-footer">
+			<button class="ui-btn app-footer-btn" id="page-sound-info-btn-ok">
+				<div class='app-footer-btn-icon app-footer-btn-icon-left app-icon-btn-ok'> </div>					
+			</button>		
+			<button class="ui-btn app-footer-btn" id="page-sound-info-btn-cancel">
+				<div class='app-footer-btn-icon app-footer-btn-icon-right app-icon-btn-cancel'> </div>				
+			</button>
+		</footer>
     </div>
-
+        
     <!-- edit sound page -->
     <div class="ui-page" id="edit">
         <header class="ui-header">
@@ -161,6 +186,7 @@
     <script src="js/app.js"></script>
     <script src="js/soundlist-controls.js"></script>   
     <script src="js/recording-control.js"></script>
+    <script src="js/soundinfo-control.js"></script>
     <script src="js/ui-utils.js"></script>
     <script src="js/matcher/soundkeymatching.js"></script>
     <script src="js/matcher/matcher.js"></script>

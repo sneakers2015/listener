@@ -26,3 +26,87 @@
 {			
 	opacity : 0.8;
 }
+
+.app-ui-footer 
+{
+
+}
+
+.app-icon-btn-ok
+{
+	background-image: url(../res/images/button_ok.png);	
+}
+
+.app-icon-btn-cancel
+{
+	background-image: url(../res/images/button_cancel.png);
+}
+
+.app-footer-btn 
+{	
+
+}
+
+.app-footer-btn-icon
+{
+	width:32px;
+	height:32px;
+}
+
+.app-footer-btn-icon-left
+{
+	position: relative;
+	left: 90px;
+	top: -5px;
+	background-size: 100% 100%;
+}
+
+.app-footer-btn-icon-right
+{
+	position: relative;
+	left: 35px;	
+	top: -5px;	
+	background-size: 100% 100%;
+}
+
+.sound-info-item
+{
+	width:300px;
+	height:64px;	
+	position: relative;
+	margin-top : 5px;
+	margin-bottom : 5px;
+}
+
+.sound-info-item-title
+{
+	height:64px;
+	width:64px;	
+	position: absolute;
+}
+
+.sound-info-item-input
+{
+	width:246px;
+	height:64px;	
+	box-sizing: border-box;
+  	position: absolute;
+  	left: 64px;
+  	top: 0px;
+  	border-radius:8px;
+}
+
+.icon-nametag
+{
+	background-image: url(../res/images/icon_smile_64.png);	
+}
+
+.icon-call
+{
+	background-image: url(../res/images/icon_call_64.png);	
+}
+
+.icon-message
+{
+	background-image: url(../res/images/icon_message_64.png);
+}

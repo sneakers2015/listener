@@ -2,6 +2,7 @@ var RecordingControlUI = (function() {
     console.log('init');
 
     var page = document.getElementById( "recording-sound-page" );
+    var pageSoundInfo = document.getElementById( "page-sound-info" );
     var btn_play = page.querySelector( "#recording-page-play-btn" );
     var CLASS_RECORDING = 'recording-btn-recording';
     var CLASS_NORMAL = 'recording-btn-normal';
@@ -21,7 +22,8 @@ var RecordingControlUI = (function() {
     		$(btn_play).addClass(CLASS_NORMAL);
     		$(btn_play).removeClass(CLASS_RECORDING);
     		_handleEndOfRecord(); //TODO : FIXME
-    		tau.back();
+    		tau.changePage(pageSoundInfo);
+//    		tau.back();
     	}
     }
 
