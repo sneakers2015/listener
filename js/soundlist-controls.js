@@ -4,6 +4,7 @@ var SoundListControl = (function() {
     var page = document.getElementById( "soundlist-page" );
     var recordingSoundPage = document.getElementById( "recording-sound-page" );
     var pageSoundInfo = document.getElementById( "page-sound-info" );
+    var pageSoundHistory = document.getElementById( "page-sound-history" );
     var listElement = page.querySelector("#sound-listview" );
 
     var btn_addSound = page.querySelector( "#addSoundBtn" );
@@ -14,6 +15,7 @@ var SoundListControl = (function() {
     var deleteTargetListItemId = null; //using
     var swipeList = null; //dynamic create
 
+    var rotaryDetentHandler;
     function updateSoundList () {
         console.log('updateSoundList');
         var soundListView = $('#sound-listview');
@@ -123,6 +125,17 @@ var SoundListControl = (function() {
 
     page.addEventListener( "pagebeforeshow", function() {
         console.log('pagebeforeshow');
+     // "rotarydetent" event handler
+		rotaryDetentHandler = function(e) {
+			// Get rotary direction
+			direction = e.detail.direction;
+			if (direction === "CW") {
+				tau.changePage(pageSoundHistory);
+			} 
+		};
+
+		// Add rotarydetent handler to document
+		document.addEventListener("rotarydetent", rotaryDetentHandler);
     });
 
     document.getElementById('sound-delete-popup-cancel').addEventListener('click', function(ev) {
@@ -140,7 +153,7 @@ var SoundListControl = (function() {
 
     page.addEventListener( "pagebeforehide", function() {
         console.log('pagebeforehide');
-
+        document.removeEventListener("rotarydetent", rotaryDetentHandler);
         // release handler
         console.log('off listMatchHandler');
         listenerApp.off('soundMatched', listMatchHandler);

@@ -359,3 +359,12 @@ window.addEventListener( 'tizenhwkey', function( ev ) {
 //		}
 	}
 } );
+
+document.addEventListener("rotarydetent", function (e) {
+	direction = e.detail.direction;
+	if (direction === "CCW") {
+		window.history.back();
+	}
+});
+
+
