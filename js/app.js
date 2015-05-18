@@ -289,14 +289,14 @@ function vibrate(flag) {
             timeID = null;
         }
         timeID = setInterval( function() { navigator.vibrate(1000); }, 1000);
-        console.log('device vibrate on');
+        console.log('vibrate on');
     } else {
         if ( timeID != null ) {
             clearInterval(timeID);
             timeID = null;
         }
         navigator.vibrate(0);
-        console.log('device vibrate off');
+        console.log('vibrate off');
     }
 }
 
@@ -306,11 +306,9 @@ function vibrate(flag) {
  * @see http://tools.ietf.org/html/rfc5724
  */
 function sendSMS(number, msg) {
+    console.log('send sms: ' + number + ':' + msg);
     // FIXME:: need to test
-    // <a href="sms:+19725551212?body=hellow">SMS Me</a>
-    // http://stackoverflow.com/questions/4787905/sms-url-on-android
-    //window.location.href="sms:+19725551212?body=hellow";
-    var sms = 'sms:+' + number + '?body=' + msg;
+    var sms = 'smsto:+' + number + '?body=' + msg;
     window.location.href = sms;
 }
 
