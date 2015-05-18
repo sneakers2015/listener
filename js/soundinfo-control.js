@@ -6,7 +6,6 @@ var SoundInfoControl = (function() {
     var recordingSoundPage = document.getElementById( "recording-sound-page" );
     
     var btn_ok = page.querySelector( "#page-sound-info-btn-ok" );
-    var btn_cancel = page.querySelector( "#page-sound-info-btn-cancel" );
     var input_title = page.querySelector("#page-sound-info-nametag-input");
     var input_phone = page.querySelector("#page-sound-info-call-input");
     var input_message = page.querySelector("#page-sound-info-message-input");
@@ -50,10 +49,6 @@ var SoundInfoControl = (function() {
     
     btn_ok.addEventListener('click', function(ev) {
     	_handleOk();    
-    });
-    
-    btn_cancel.addEventListener('click', function(ev) {
-    	_handleCancel();    
     });
 
     return {

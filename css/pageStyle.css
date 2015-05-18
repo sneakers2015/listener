@@ -85,28 +85,30 @@
 .sound-info-item
 {
 	width:300px;
-	height:64px;	
+	height:48px;	
 	position: relative;
 	margin-top : 5px;
-	margin-bottom : 5px;
+	margin-bottom : 5px;	
 }
 
 .sound-info-item-title
 {
-	height:64px;
-	width:64px;	
+	height:32px;
+	width:32px;	
 	position: absolute;
+	background-size:contain;
 }
 
 .sound-info-item-input
 {
 	width:246px;
-	height:64px;	
+	height:32px;	
 	box-sizing: border-box;
   	position: absolute;
   	left: 64px;
   	top: 0px;
   	border-radius:8px;
+  	font-size:20px;
 }
 
 .icon-nametag
@@ -192,4 +194,9 @@
   	opacity: 0.0;
   	border-radius: 8px;
   	text-align: center;
+}
+
+.content-padding-small
+{
+	margin-top:10px;
 }
