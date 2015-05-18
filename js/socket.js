@@ -1,13 +1,19 @@
 var Cast = (function() {
     var cast = new Broadcast(function(msg) {
         console.log('receive: ' + msg);
-        try {
-            var num = parseInt(msg);
+
+        if (strStartsWith(msg, "#")) {
+            // number
+            
+            var num = parseInt(msg.substr(1));
             console.log('listenerApp.emit(soundMatched, ' + num +')');
             listenerApp.emit('soundMatched', num);
-        } catch (e) {
-            // TODO: handle exception
-            console.log('not number');
+        } else if (strStartsWith(msg, "@")) {
+            // string
+            var str = parseInt(msg.substr(1));
+            // TODO::
+        } else {
+            console.log('not match');
         }
     });
 
@@ -17,6 +23,10 @@ var Cast = (function() {
 //            $('#msgbox').val('');
 //        }
 //    });
+
+    function strStartsWith(str, prefix) {
+        return str.indexOf(prefix) === 0;
+    }
 
     return {
         cast : cast

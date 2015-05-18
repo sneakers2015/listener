@@ -318,6 +318,7 @@ function sendSMS(number, msg) {
             msg: msg,
     }
     // send msg for noti center
+    // @위도:35.195321, 경도:129.294545 청각장애인 [홍길동]님이 위험에 노출되어 긴급출동을 요청합니다.
     Cast.cast.send(JSON.stringify(data));
 }
 
