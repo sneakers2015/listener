@@ -306,10 +306,19 @@ function vibrate(flag) {
  * @see http://tools.ietf.org/html/rfc5724
  */
 function sendSMS(number, msg) {
-    console.log('send sms: ' + number + ':' + msg);
-    // FIXME:: need to test
+    console.log('send sms: ' + number + ',' + msg);
+    // Tizen wearable is not support sms protocol.
+    /* 
     var sms = 'smsto:+' + number + '?body=' + msg;
     window.location.href = sms;
+     */
+    var data = {
+            time: (new Date()).toLocaleTimeString(),
+            number: number,
+            msg: msg,
+    }
+    // send msg for noti center
+    Cast.cast.send(JSON.stringify(data));
 }
 
 /**
@@ -344,26 +353,15 @@ function getHistoryByID(soundID) {
 }
 
 window.addEventListener( 'tizenhwkey', function( ev ) {
-	if( ev.keyName === "back" ) {
-		var page = document.getElementsByClassName( 'ui-page-active' )[0],
-			pageid = page ? page.id : "";
-//		if( pageid === "main" ) {
-//			try {
-//				tizen.application.getCurrentApplication().exit();
-//			} catch (ignore) {
-//			}
-//		} else {
-			window.history.back();
-//		}
-	}
-} );
-
-document.addEventListener("rotarydetent", function (e) {
-	direction = e.detail.direction;
-	console.log('rotary', e.detail.direction);
-	if (direction === "CCW") {
-		window.history.back();
-	}
+    if( ev.keyName === "back" ) {
+        window.history.back();
+    }
 });
 
-
+document.addEventListener("rotarydetent", function (e) {
+    direction = e.detail.direction;
+    console.log('rotary', e.detail.direction);
+    if (direction === "CCW") {
+        window.history.back();
+    }
+});
