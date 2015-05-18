@@ -22,6 +22,7 @@ var HistoryControl = (function() {
 		$('.history-container').append("<div class='history-item'><span class='history-item-title'>title</span><span class='history-item-time'>time</span><div class='history-item-icon'>icon</div></div>"
     			
     	);
+		showFlashPanel('title');
 	};
 	
 	function _addHistoryItemBySound () {
@@ -30,6 +31,7 @@ var HistoryControl = (function() {
 	
 	function showFlashPanel (text) {
 		flashPanel.innerText = text;
+		blinkBlue(flashPanel);
 	};
 	
 	document.addEventListener('click', function(ev) {
