@@ -98,8 +98,8 @@ var SoundListControl = (function() {
     }
 
     function openModifyPage (soundID) {
-   	SoundInfoControl.openModifySoundPage(soundID);
-//    	tau.changePage(modifySoundPage);
+       SoundInfoControl.openModifySoundPage(soundID);
+//        tau.changePage(modifySoundPage);
     }
 
     listElement.addEventListener("swipelist.right", function(evt) {
@@ -111,10 +111,9 @@ var SoundListControl = (function() {
     });
 
     listElement.addEventListener("swipelist.left", function(evt) {
-   	console.log('swipe left', evt.target);
-   	var id = evt.target.id;
-   	openModifyPage (id);
-
+       console.log('swipe left', evt.target);
+       var id = evt.target.id;
+       openModifyPage (id);
    });
 
     page.addEventListener( "pageshow", function() {
@@ -125,17 +124,18 @@ var SoundListControl = (function() {
 
     page.addEventListener( "pagebeforeshow", function() {
         console.log('pagebeforeshow');
-     // "rotarydetent" event handler
-		rotaryDetentHandler = function(e) {
-			// Get rotary direction
-			direction = e.detail.direction;
-			if (direction === "CW") {
-				tau.changePage(pageSoundHistory);
-			} 
-		};
 
-		// Add rotarydetent handler to document
-		document.addEventListener("rotarydetent", rotaryDetentHandler);
+        // "rotarydetent" event handler
+        rotaryDetentHandler = function(e) {
+            // Get rotary direction
+            direction = e.detail.direction;
+            if (direction === "CW") {
+                tau.changePage(pageSoundHistory);
+            } 
+        };
+
+        // Add rotarydetent handler to document
+        document.addEventListener("rotarydetent", rotaryDetentHandler);
     });
 
     document.getElementById('sound-delete-popup-cancel').addEventListener('click', function(ev) {
@@ -153,6 +153,7 @@ var SoundListControl = (function() {
 
     page.addEventListener( "pagebeforehide", function() {
         console.log('pagebeforehide');
+
         document.removeEventListener("rotarydetent", rotaryDetentHandler);
         // release handler
         console.log('off listMatchHandler');

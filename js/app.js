@@ -249,10 +249,12 @@ function notification(noti) {
         // TODO::
         // noti from history, to fix from listner page
         function onsuccess() {
+            vibrate(true);
+            setTimeout(function() {
+               vibrate(false);
+            }, 2000);
             // FIXME::
-            alert('notification: ' + noti.id + ' : ' + noti.title);
-            //vibrate(true);
-            //vibrate(false);
+            alert('notification: ' + noti.title);
             //sendSMS
         }
         var app = tizen.application.getCurrentApplication();
@@ -308,10 +310,8 @@ function vibrate(flag) {
 function sendSMS(number, msg) {
     console.log('send sms: ' + number + ',' + msg);
     // Tizen wearable is not support sms protocol.
-    /* 
-    var sms = 'smsto:+' + number + '?body=' + msg;
-    window.location.href = sms;
-     */
+    // var sms = 'smsto:+' + number + '?body=' + msg;
+    // window.location.href = sms;
     var data = {
             time: (new Date()).toLocaleTimeString(),
             number: number,
