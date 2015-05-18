@@ -110,3 +110,54 @@
 {
 	background-image: url(../res/images/icon_message_64.png);
 }
+
+
+.history-container {
+	position: relative;
+	width:300px;
+	left:14px;
+}
+
+.history-item {
+	width:100%;
+	height:25px;
+	box-sizing: border-box;;
+	background-color:RGB(0, 178, 255);
+	font-size:15px;
+	border-radius:0px;
+	margin-bottom:4px;
+	margin-top:4px;
+	position:relative;
+}
+
+.history-item:active {
+	background-color:blue;
+}
+
+.history-item-title {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100px;
+	height:25px;
+	box-sizing: border-box;
+	padding-left:10px;
+}
+
+.history-item-time {
+	position:absolute;
+	left:100px;
+	top:0;
+	width:150px;
+	height:25px;
+	box-sizing: border-box;
+}
+
+.history-item-icon {
+	position:absolute;
+	right:0;
+	top:0;
+	width:50px;
+	height:25px;
+	box-sizing: border-box;
+}
