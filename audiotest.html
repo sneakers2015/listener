@@ -10,6 +10,26 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pageStyle.css">
 
+    <script>
+    function objToString (obj) {
+        var str = '';
+        for (var p in obj) {
+            //if (obj.hasOwnProperty(p)) {
+                str += p + '::' + obj[p] + '\n';
+            //}
+        }
+        return str;
+    }
+    function printToString (obj) {
+        console.log(obj + ' = {');
+        for (var p in obj) {
+            //if (obj.hasOwnProperty(p)) {
+                console.log('    ' + p + '::' + obj[p]);
+            //}
+        }
+        console.log('}');
+    }
+    </script>
     <script src="lib/jquery-1.11.3.min.js"></script>
     <script src="lib/underscore-min.js"></script>
 </head>
@@ -20,9 +40,8 @@
             <h2 class="ui-title">AudioTest</h2>
         </header>
         <div class="ui-content content-padding">
-            <ul class="ui-listview">
-                <p>알림기록(이름,시간,전송여부), 알림삭제</p>
-            </ul>
+            <canvas id="wave" style="width:300px; height:100px; background-color:red;"></canvas>
+            <button id="sampling">Start</button>
         </div>
     </div>
 
