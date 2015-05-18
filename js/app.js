@@ -312,14 +312,33 @@ function sendSMS(number, msg) {
     // Tizen wearable is not support sms protocol.
     // var sms = 'smsto:+' + number + '?body=' + msg;
     // window.location.href = sms;
+
+    var location = getLocation();
     var data = {
             time: (new Date()).toLocaleTimeString(),
             number: number,
             msg: msg,
+            location: location
     }
-    // send msg for noti center
-    // @위도:35.195321, 경도:129.294545 청각장애인 [홍길동]님이 위험에 노출되어 긴급출동을 요청합니다.
+
+    // send msg notification
     Cast.cast.send(JSON.stringify(data));
+}
+
+/**
+ * getLocation
+ */
+function getLocation() {
+    if (navigator.geolocation) {
+        console.log('geolocation')
+        navigator.geolocation.getCurrentPosition(function showPosition(position) {
+            console.log("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+            return position;
+        });
+    } else {
+        console.log('Geolocation is not supported by this browser.');
+    }
+    return null;
 }
 
 /**
