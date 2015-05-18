@@ -104,12 +104,14 @@ var HistoryControl = (function() {
         console.log('pagebeforeshow');
 
         listenerApp.on('soundMatched', historyMatchHandler);
+        btn_popup_icon.addEventListener ('click', handleClickCallIcon());
     });
 
     page.addEventListener( "pagebeforehide", function() {
         console.log('pagebeforehide');
 
         listenerApp.off('soundMatched', historyMatchHandler);
+        btn_popup_icon.removeEventListener ('click', handleClickCallIcon());
     });
 
     function _createSamples () {
@@ -134,11 +136,7 @@ var HistoryControl = (function() {
     
     headerBtn.addEventListener ('dblclick', function() {
     	clearHistory();
-    });
-    
-    btn_popup_icon.addEventListener ('click', function () {
-//    	handleClickCallIcon();
-    });
+    });       
 
 
     return {
