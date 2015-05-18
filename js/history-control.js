@@ -4,12 +4,13 @@ var HistoryControl = (function() {
     var page = document.getElementById('page-sound-history');
     var flashPanel = page.querySelector('.flash-panel');
     var headerBtn = page.querySelector('.ui-header');
-    
+
     var btn_ok = page.querySelector('.send-message-cancel');
     var btn_cancel = page.querySelector('.send-message-ok');
     var popupElem = page.querySelector('#notiPopup');
     var btn_popup_icon = page.querySelector('.notipopup-center-btn');
 
+    var currentNoti = null;
     function startMatcher () {
         // TODO
     }
@@ -33,11 +34,11 @@ var HistoryControl = (function() {
     };
 
     function _addHistoryItem (history) {
-    	var time = history.timestamp;
-    	var sound = listenerApp.getSoundByID(history.soundID);
-    	if (sound) {
-    		var title = sound.id;	
-    	}    	
+        var time = history.timestamp;
+        var sound = listenerApp.getSoundByID(history.soundID);
+        if (sound) {
+            var title = sound.id;
+        }
     };
 
     function showFlashPanel (text) {
@@ -45,14 +46,13 @@ var HistoryControl = (function() {
         blinkBlue(flashPanel);
     };
 
-
     function historyMatchHandler( event, soundID ) {
         console.log( 'history matchHandler', soundID );
 
         var sound = getSoundByID( soundID );
         if (!sound || !sound.notiEnabled) {
-        	return;
-        }       
+            return;
+        }
 
         var currentDate = new Date;
         var history = getHistoryByID( soundID );
@@ -79,25 +79,32 @@ var HistoryControl = (function() {
                 message: sound.message
         }
         notification(noti);
-        _addHistoryItem(history);
+        
+        //_addHistoryItem(history);
 
+        openNotiPopup(noti);
         // FIXME:
         //blink($('#content1')[0]);
 
         // TODO:: link to send SMS in Alert Dialog
-
-        // FIXME:
-        //updateHistoryList();
     }
-    
+
+    function openNotiPopup (noti) {
+        tau.openPopup(popupElem);
+        currentNoti = noti;
+    };
 
     function clearHistory () {
-    	$('.history-container').empty();
+        $('.history-container').empty();
     };
-    
+
     function handleClickCallIcon () {
-    	console.log('send mms');
-    	//send mms
+        if (currentNoti) {
+        sendSMS(currentNoti.number, currentNoti.msg);
+        currentNoti = null;
+        }
+        console.log('send mms');
+        //send mms
     };
 
     page.addEventListener( "pagebeforeshow", function() {
@@ -115,29 +122,24 @@ var HistoryControl = (function() {
     });
 
     function _createSamples () {
-    	var samples = ['alarm', 'crash', 'klaxon', 'doorbell'];
-    	var sampleCnt = 8;
-    	var idx;
+        var samples = ['alarm', 'crash', 'klaxon', 'doorbell'];
+        var sampleCnt = 8;
+        var idx;
         for (var i = sampleCnt - 1; i >= 0; i--) {
-        	idx = _.random(0, 4);
-        	addNewItemElem(samples[idx], parseInt(i/2) + '분전');
-        }             
+            idx = _.random(0, 4);
+            addNewItemElem(samples[idx], parseInt(i/2) + '분전');
+        }
     };
-    
-    function openNotiPopup () {
-    	tau.openPopup(popupElem);
-    };
-    
+
     document.addEventListener('click', function(ev) {
 //        console.log('click', ev);
 //        _createSamples();
 //        openNotiPopup();
     });
-    
-    headerBtn.addEventListener ('dblclick', function() {
-    	clearHistory();
-    });       
 
+    headerBtn.addEventListener ('dblclick', function() {
+        clearHistory();
+    });
 
     return {
     }
