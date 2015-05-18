@@ -170,6 +170,6 @@ var SoundListControl = (function() {
     });
 
     return {
-        updateSoundList: updateSoundList
-    }
+        updateSoundList : updateSoundList
+    };
 }());

@@ -1,4 +1,4 @@
-var SoundListControl = (function() {
+var HistoryControl = (function() {
 	
     var page = document.getElementById('page-sound-history');
     var flashPanel = page.querySelector('.flash-panel');
