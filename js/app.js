@@ -253,9 +253,6 @@ function notification(noti) {
             setTimeout(function() {
                vibrate(false);
             }, 2000);
-            // FIXME::
-            alert('notification: ' + noti.title);
-            //sendSMS
         }
         var app = tizen.application.getCurrentApplication();
         tizen.application.launch(app.appInfo.id, onsuccess);
