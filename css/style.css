@@ -39,13 +39,14 @@ body {
 
 .blink-blue {
     -webkit-animation: myblinkBlue 2s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes myblinkBlue {
-    0%   {opacity: 0.3;}
+    0%   {opacity: 0.5;}
     50% {opacity: 1.0;}
-    75% {opacity: 0.7;}
-    100% {opacity: 1.0;}
+    100% {opacity: 0.5;}
 }
 
 /* ---------------------------------- LISTVIEW ---------------------------------- */

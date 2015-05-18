@@ -189,7 +189,7 @@ var SoundListControl = (function() {
     });
 
     document.getElementById('addSoundBtn').addEventListener('click', function(ev) {
-    	_createSample(); //TODO : remove it
+//    	_createSample(); //TODO : remove it
         tau.changePage(recordingSoundPage);
     });
 

@@ -7,6 +7,8 @@ var HistoryControl = (function() {
     
     var btn_ok = page.querySelector('.send-message-cancel');
     var btn_cancel = page.querySelector('.send-message-ok');
+    var popupElem = page.querySelector('#notiPopup');
+    var btn_popup_icon = page.querySelector('.notipopup-center-btn');
 
     function startMatcher () {
         // TODO
@@ -92,6 +94,11 @@ var HistoryControl = (function() {
     function clearHistory () {
     	$('.history-container').empty();
     };
+    
+    function handleClickCallIcon () {
+    	console.log('send mms');
+    	//send mms
+    };
 
     page.addEventListener( "pagebeforeshow", function() {
         console.log('pagebeforeshow');
@@ -115,14 +122,22 @@ var HistoryControl = (function() {
         }             
     };
     
+    function openNotiPopup () {
+    	tau.openPopup(popupElem);
+    };
+    
     document.addEventListener('click', function(ev) {
-        console.log('click', ev);
-        _createSamples();
-        
+//        console.log('click', ev);
+//        _createSamples();
+//        openNotiPopup();
     });
     
     headerBtn.addEventListener ('dblclick', function() {
     	clearHistory();
+    });
+    
+    btn_popup_icon.addEventListener ('click', function () {
+//    	handleClickCallIcon();
     });
 
 
