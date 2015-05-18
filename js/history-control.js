@@ -3,6 +3,10 @@ var HistoryControl = (function() {
 
     var page = document.getElementById('page-sound-history');
     var flashPanel = page.querySelector('.flash-panel');
+    var headerBtn = page.querySelector('.ui-header');
+    
+    var btn_ok = page.querySelector('.send-message-cancel');
+    var btn_cancel = page.querySelector('.send-message-ok');
 
     function startMatcher () {
         // TODO
@@ -20,13 +24,18 @@ var HistoryControl = (function() {
         }
     }
 
-    function addNewItem () {
-        $('.history-container').append("<div class='history-item'><span class='history-item-title'>title</span><span class='history-item-time'>time</span><div class='history-item-icon'>icon</div></div>"
+    function addNewItemElem (title, time) {
+        $('.history-container').prepend("<div class='history-item'><span class='history-item-title'>" + title + "</span><span class='history-item-time'>" + time + "</span><div class='history-item-icon'>icon</div></div>"
         );
-        showFlashPanel('title');
+        showFlashPanel(title);
     };
 
-    function _addHistoryItemBySound () {
+    function _addHistoryItem (history) {
+    	var time = history.timestamp;
+    	var sound = listenerApp.getSoundByID(history.soundID);
+    	if (sound) {
+    		var title = sound.id;	
+    	}    	
     };
 
     function showFlashPanel (text) {
@@ -39,15 +48,15 @@ var HistoryControl = (function() {
         console.log( 'history matchHandler', soundID );
 
         var sound = getSoundByID( soundID );
-        if ( !sound.notiEnabled ) {
-            return;
-        }
+        if (!sound || !sound.notiEnabled) {
+        	return;
+        }       
 
         var currentDate = new Date;
         var history = getHistoryByID( soundID );
         if ( !history ) {
             // new history
-            addNewHistory(soundID, currentDate);
+            history = addNewHistory(soundID, currentDate);
         } else {
             // exist history
             var diffMs = currentDate - history.timestamp;
@@ -68,6 +77,7 @@ var HistoryControl = (function() {
                 message: sound.message
         }
         notification(noti);
+        _addHistoryItem(history);
 
         // FIXME:
         //blink($('#content1')[0]);
@@ -77,6 +87,11 @@ var HistoryControl = (function() {
         // FIXME:
         //updateHistoryList();
     }
+    
+
+    function clearHistory () {
+    	$('.history-container').empty();
+    };
 
     page.addEventListener( "pagebeforeshow", function() {
         console.log('pagebeforeshow');
@@ -90,10 +105,26 @@ var HistoryControl = (function() {
         listenerApp.off('soundMatched', historyMatchHandler);
     });
 
+    function _createSamples () {
+    	var samples = ['alarm', 'crash', 'klaxon', 'doorbell'];
+    	var sampleCnt = 8;
+    	var idx;
+        for (var i = sampleCnt - 1; i >= 0; i--) {
+        	idx = _.random(0, 4);
+        	addNewItemElem(samples[idx], parseInt(i/2) + '분전');
+        }             
+    };
+    
     document.addEventListener('click', function(ev) {
         console.log('click', ev);
-        addNewItem();
+        _createSamples();
+        
     });
+    
+    headerBtn.addEventListener ('dblclick', function() {
+    	clearHistory();
+    });
+
 
     return {
     }

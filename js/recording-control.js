@@ -4,6 +4,9 @@ var RecordingControlUI = (function() {
     var page = document.getElementById( "recording-sound-page" );
     var pageSoundInfo = document.getElementById( "page-sound-info" );
     
+    var headerBtn = page.querySelector('ui-header');
+    
+    
     var eualizer_bg = page.querySelector('.recording-page-equalizer-bg');
     var btn_play = page.querySelector( "#recording-page-play-btn" );
     var CLASS_RECORDING = 'recording-btn-recording';
@@ -23,10 +26,10 @@ var RecordingControlUI = (function() {
     		$(eualizer_bg).css('display', 'block');
     	} else {
     		$(btn_play).addClass(CLASS_NORMAL);
-    		$(btn_play).removeClass(CLASS_RECORDING);
-    		_handleEndOfRecord(); //TODO : FIXME
+    		$(btn_play).removeClass(CLASS_RECORDING);   		
     		$(eualizer_bg).css('display', 'none');
-    		tau.changePage(pageSoundInfo);    		
+    		_handleEndOfRecord(); //TODO : FIXME
+//    		tau.changePage(pageSoundInfo);    		
 //    		tau.back();
     	}
     }
@@ -35,7 +38,11 @@ var RecordingControlUI = (function() {
     	var newSoundID = generateNewSoundID();
 	    var defaultTitle = 'Sound Sample #' + newSoundID;
     	var randomDial = _.random(0, 100);
-    	addNewSound(defaultTitle, null, null, randomDial, 'msg');
+    	var newSound = addNewSound(defaultTitle, null, null, randomDial, 'msg');
+    	if (newSound) {
+    		SoundInfoControl.openModifySoundPage(newSound.id);    		
+    	}
+    	
 //    	updateSoundList();
     }
 //
@@ -89,7 +96,7 @@ var RecordingControlUI = (function() {
     	$(btn_play).removeClass(CLASS_RECORDING);
     	$(eualizer_bg).css('display', 'none');
     });
-
+       
     return {
     	
     }

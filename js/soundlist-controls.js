@@ -150,6 +150,28 @@ var SoundListControl = (function() {
         }
         tau.closePopup();
     });
+    
+    function _createSample () {
+    	listenerApp.sounds = [];
+    	var samples = [
+    	               {title:'alarm',
+    	            	   dial : '0000' },
+    	            	   {title:'crash',
+        	            	   dial : '112'
+        	            	   },
+        	            	   {title:'klaxon',
+            	            	   dial : '119'
+            	            	   },
+            	            	   {title:'doorbell',
+                	            	   dial : '010-555-5555'
+                	            	   }
+    	               ]
+    	;
+    	for (var i = 0; i < samples.length; i++) {
+    		var newSoundID = generateNewSoundID();
+    		addNewSound(samples[i].title, null, null, samples[i].dial, 'msg');
+    	}    		    
+    }
 
     page.addEventListener( "pagebeforehide", function() {
         console.log('pagebeforehide');
@@ -167,6 +189,7 @@ var SoundListControl = (function() {
     });
 
     document.getElementById('addSoundBtn').addEventListener('click', function(ev) {
+    	_createSample(); //TODO : remove it
         tau.changePage(recordingSoundPage);
     });
 
