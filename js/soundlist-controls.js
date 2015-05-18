@@ -168,16 +168,6 @@ var SoundListControl = (function() {
     document.getElementById('addSoundBtn').addEventListener('click', function(ev) {
         tau.changePage(recordingSoundPage);
     });
-    
-    document.addEventListener('click', function(ev) {
-    	console.log('click', ev);
-    	$('.history-container').append("<div class='history-item'><span class='history-item-title'>title</span><span class='history-item-time'>time</span><div class='history-item-icon'>icon</div></div>"
-    			
-    	);
-    	
-    	
-    	
-    });
 
     return {
         updateSoundList: updateSoundList

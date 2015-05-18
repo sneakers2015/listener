@@ -74,10 +74,11 @@
     </div>
 
     <div class="ui-page" id="recording-sound-page">
-        <header class="ui-header">
+        <header style="display:none" class="ui-header">
             <h2 class="ui-title">녹음</h2>
         </header>
         <div id="recording-sound-page-content" class="ui-content content-padding ">
+        	<div id="recording-page-equalizer-bg" class="recording-page-equalizer-bg"></div>
             <div id="recording-page-play-btn" class="recording-btn-normal"></div>
         </div>
     </div>
@@ -154,6 +155,8 @@
 					
 				</div>
 			</div>
+			<div class='flash-panel'>
+			</div>
         </div>
     </div>
 
@@ -193,6 +196,7 @@
     <script src="js/soundlist-controls.js"></script>   
     <script src="js/recording-control.js"></script>
     <script src="js/soundinfo-control.js"></script>    
+    <script src="js/history-control.js"></script>
     <script src="js/ui-utils.js"></script>
     <script src="js/matcher/soundkeymatching.js"></script>
     <script src="js/matcher/matcher.js"></script>
