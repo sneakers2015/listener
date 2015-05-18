@@ -8,7 +8,7 @@ var HistoryControl = (function() {
     var btn_ok = page.querySelector('.send-message-cancel');
     var btn_cancel = page.querySelector('.send-message-ok');
     var popupElem = page.querySelector('#notiPopup');
-    var btn_popup_icon = page.querySelector('.notipopup-center-btn');
+//    var btn_popup_icon = page.querySelector('.notipopup-center-btn');
 
     var currentNoti = null;
     function startMatcher () {
@@ -30,7 +30,7 @@ var HistoryControl = (function() {
     function addNewItemElem (title, time) {
         $('.history-container').prepend("<div class='history-item'><span class='history-item-title'>" + title + "</span><span class='history-item-time'>" + time + "</span><div class='history-item-icon'>icon</div></div>"
         );
-        showFlashPanel(title);
+//        showFlashPanel(title);
     };
 
     function _addHistoryItem (history) {
@@ -91,6 +91,7 @@ var HistoryControl = (function() {
 
     function openNotiPopup (noti) {
         tau.openPopup(popupElem);
+        showFlashPanel(noti.title);
         currentNoti = noti;
     };
 
@@ -98,27 +99,31 @@ var HistoryControl = (function() {
         $('.history-container').empty();
     };
 
-    function handleClickCallIcon () {
+    var _handleClickCallIcon = function (event) {
         if (currentNoti) {
-        sendSMS(currentNoti.number, currentNoti.msg);
-        currentNoti = null;
+        	sendSMS(currentNoti.number, currentNoti.msg);
+        	currentNoti = null;
         }
-        console.log('send mms');
+        tau.closePopup();
+        
         //send mms
     };
+    
+    popupElem.addEventListener('popupcreate', function(){
+    	document.getElementById('notipopup-center-btn').addEventListener ('click', _handleClickCallIcon);
+    });
 
-    page.addEventListener( "pagebeforeshow", function() {
-        console.log('pagebeforeshow');
-
+    page.addEventListener( "pageshow", function() {
+        console.log('pagebeforeshow');        
         listenerApp.on('soundMatched', historyMatchHandler);
-        btn_popup_icon.addEventListener ('click', handleClickCallIcon());
+        
     });
 
     page.addEventListener( "pagebeforehide", function() {
         console.log('pagebeforehide');
-
+//        btn_popup_icon.removeEventListener ('click', _handleClickCallIcon);
         listenerApp.off('soundMatched', historyMatchHandler);
-        btn_popup_icon.removeEventListener ('click', handleClickCallIcon());
+       
     });
 
     function _createSamples () {

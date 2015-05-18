@@ -204,6 +204,8 @@
 	top:148px;
 	width:64px;
 	height:64px;
+	background-color: transparent;
+	border: 0;
 }
 .content-padding-small
 {
