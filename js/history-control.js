@@ -76,7 +76,8 @@ var HistoryControl = (function() {
                 id : sound.id,
                 title : sound.title,
                 dialNumber : sound.number,
-                message: sound.message
+                message: sound.message,
+                time : currentDate,
         }
         notification(noti);
         
@@ -90,6 +91,11 @@ var HistoryControl = (function() {
     }
 
     function openNotiPopup (noti) {
+    	var history = {
+    			title : noti.title,
+    			time : noti.time
+    	};
+    	listenerApp.history.push(history);
         tau.openPopup(popupElem);
         showFlashPanel(noti.title);
         currentNoti = noti;
@@ -116,7 +122,8 @@ var HistoryControl = (function() {
     page.addEventListener( "pageshow", function() {
         console.log('pagebeforeshow');        
         listenerApp.on('soundMatched', historyMatchHandler);
-        
+        listenerApp.sounds=[];
+        addNewSound('title', null, null, '0000', 'msg');        
     });
 
     page.addEventListener( "pagebeforehide", function() {
